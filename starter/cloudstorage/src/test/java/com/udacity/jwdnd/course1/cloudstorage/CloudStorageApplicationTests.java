@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,10 +19,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.Ordered;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+
 class CloudStorageApplicationTests {
 
 	@LocalServerPort
@@ -79,6 +82,7 @@ class CloudStorageApplicationTests {
 	}
 	
 	@Test
+	@Order(1)
 	public void ckAuthorizedUserAccess() {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
 		
@@ -105,9 +109,6 @@ class CloudStorageApplicationTests {
 	public void ckNoteCreated() {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
 		
-		// Signup user
-		signupUser(userFirstName, userLastName, userUserName, userPassword);
-		
 		// Login user
 		loginUser(userUserName, userPassword);
 		
@@ -128,9 +129,6 @@ class CloudStorageApplicationTests {
 	@Test
 	public void ckNoteDeleted() {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
-		
-		// Signup user
-		signupUser(userFirstName, userLastName, userUserName, userPassword);
 		
 		// Login user
 		loginUser(userUserName, userPassword);
@@ -162,9 +160,6 @@ class CloudStorageApplicationTests {
 	@Test
 	public void ckNoteEdited() {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
-		
-		// Signup user
-		signupUser(userFirstName, userLastName, userUserName, userPassword);
 		
 		// Login user
 		loginUser(userUserName, userPassword);
@@ -198,9 +193,6 @@ class CloudStorageApplicationTests {
 	public void ckCredentialCreated() {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
 		
-		// Signup user
-		signupUser(userFirstName, userLastName, userUserName, userPassword);
-		
 		// Login user
 		loginUser(userUserName, userPassword);
 		
@@ -221,9 +213,6 @@ class CloudStorageApplicationTests {
 	@Test
 	public void ckCredentialDeleted() {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
-		
-		// Signup user
-		signupUser(userFirstName, userLastName, userUserName, userPassword);
 		
 		// Login user
 		loginUser(userUserName, userPassword);
@@ -255,9 +244,6 @@ class CloudStorageApplicationTests {
 	@Test
 	public void ckCredentialEdited() {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
-		
-		// Signup user
-		signupUser(userFirstName, userLastName, userUserName, userPassword);
 		
 		// Login user
 		loginUser(userUserName, userPassword);

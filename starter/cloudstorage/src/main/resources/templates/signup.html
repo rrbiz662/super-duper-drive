@@ -15,16 +15,9 @@
             </div>
             <h1 class="display-5">Sign Up</h1>
             <form th:object="${user}" th:action="@{/signup}" action="#" method="POST">
-            	<div th:switch="${messageDisplay}">
-            		<div th:case="error" class="alert alert-danger">
-                    	<span>Username already exists! Please, choose a different one.</span>
-	                </div>
-	                <div th:case="success" class="alert alert-dark">
-	                    You successfully signed up! Please continue to the <a th:href="@{/login}">login</a> page.
-	                </div>
-               		<div th:case="*">
-            		</div>
-            	</div>
+           		<div th:if="${signupSuccess != null} and not ${signupSuccess} " class="alert alert-danger">
+                   	<span>Username already exists! Please, choose a different one.</span>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputFirstName">First Name</label>

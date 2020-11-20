@@ -3,6 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import java.security.SecureRandom;
 import java.util.Base64;
 
+import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -76,12 +77,13 @@ public class HomeController {
 			RedirectAttributes redirectAttributes, Authentication auth) {
 		boolean dbUpdated;
 		int userId = userService.getUser(auth.getName()).getUserId();
+		String fileName = file.getOriginalFilename();
 		
 		redirectAttributes.addFlashAttribute("activeTab","files");
 		
 		try {
-			if(!fileService.fileExists(file.getOriginalFilename())) {
-				fileService.insertFile(new File(0, file.getOriginalFilename(), file.getContentType(),
+			if(!fileName.isEmpty() && !fileService.fileExists(fileName)) {
+				fileService.insertFile(new File(0, fileName, file.getContentType(),
 						file.getSize(), userId, file.getBytes()));
 				dbUpdated = true;
 			}
